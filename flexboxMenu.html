@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Desafio Menu</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<style>
+		body {
+			margin: 0;
+			font-family: 'Oswald', sans-serif;
+			background-color: lightgray;
+		}
+		
+		.cabecalho {
+			background: #333;
+			color: #fff;
+			border-bottom: solid 5px #4faddb;
+			height: 80px;
+		}
+		
+		.logo img {
+			height: 50px;
+		}
+		
+		.menu ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		a {
+			text-decoration: none;
+			color: #eee;
+			font-size: 1.3em;
+			padding: 10px 15px;
+		}
+		
+		.menu a:hover,
+		.selected {
+			background-color: #4faddb;
+			color: #000;
+		}
+		
+		.cabecalho .botao {
+			border-radius: 30px;
+			padding: 10px 25px;
+			margin-right: 10px;
+		}
+		
+		.destaque {
+			background: #f50a31;
+			color: #fff;
+		}
+		
+		.flex-container {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.menu {
+			flex-grow: 1;
+		}
+
+		.menu ul {
+			display: flex;
+			align-items: center;
+		}
+
+		.menu ul li {
+			margin: 0 10px;
+		}
+
+		.menu-toggle {
+			margin-right: 10px;	
+			padding: 5px 10px;
+		}
+
+		.menu-toggle > i { font-size: 15px; }
+
+		@media(min-width: 679px) {
+			.cabecalho .menu-toggle { display: none; }
+		}
+
+		@media(max-width: 680px) {
+			.cabecalho .menu { display: none; }
+			
+			.logo img { height: 45px; }
+		}
+
+		@media(max-width: 900px) {
+			.cabecalho .autenticacao { display: none; }
+		}
+
+	</style>
+</head>
+
+<body>
+	<header class="cabecalho flex-container">
+		<div class="logo">
+			<a href="#inicio">
+				<img src="http://files.cod3r.com.br/curso-web/logo.png" alt="Logo" />
+			</a>
+		</div>
+		<button class="menu-toggle">
+			<i class="fa fa-lg fa-bars"></i>
+		</button>
+		<nav class="menu">
+			<ul class="">
+				<li>
+					<a href="#inicio">Início</a>
+				</li>
+				<li>
+					<a href="#cursos">Cursos</a>
+				</li>
+				<li>
+					<a href="#sobre">Sobre</a>
+				</li>
+				<li>
+					<a href="#contato">Contato</a>
+				</li>
+			</ul>
+		</nav>
+		<aside class="autenticacao">
+			<a href="#login">Login</a>
+			<a href="#registar" class="botao destaque">Registrar</a>
+		</aside>
+	</header>
+
+	<script>
+		window.addEventListener('hashchange', verificarHash)
+
+		function verificarHash() {
+			const urlAntiga = event.oldURL.split('#')[1]
+			const urlAtual = event.newURL.split('#')[1]
+			alterarBackground(urlAntiga, urlAtual)
+		}
+
+		function alterarBackground(hashAntiga, hashAtual) {
+			const linkAntigo = document.querySelector(`.menu a[href='#${hashAntiga}']`)
+			const linkAtual = document.querySelector(`.menu a[href='#${hashAtual}']`)
+			
+			if (hashAntiga === undefined) linkAtual.classList.add('selected')
+			else {
+				linkAntigo.classList.remove('selected')
+				linkAtual.classList.add('selected')
+			}
+		}
+	</script>
+</body>
+
+</html>
